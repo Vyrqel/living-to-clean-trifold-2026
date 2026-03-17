@@ -3,337 +3,475 @@
 <head>
   <meta charset="UTF-8">
   <title>Living to Clean the World — ASU CTW 2026 Trifold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
     :root {
-      --gd: #0a2e1c; --gm: #1a5c38; --gb: #2d9155; --gl: #6abf8a;
-      --gp: #d6f0e2; --gg: #f0faf4; --tk: #0e7490; --tl: #e0f2fe;
-      --am: #b45309; --al: #fef3c7; --ink: #0f1f14; --ims: #2d4a38;
-      --isf: #4a6655; --pur: #7c3aed; --rul: rgba(0,80,40,0.12);
+      --gd: #0a2e1c;
+      --gm: #1a5c38;
+      --gb: #2d9155;
+      --gl: #6abf8a;
+      --gp: #d6f0e2;
+      --gg: #f0faf4;
+      --tk: #0e7490;
+      --tl: #e0f2fe;
+      --am: #b45309;
+      --al: #fef3c7;
+      --ink: #0f1f14;
+      --ims: #2d4a38;
+      --isf: #4a6655;
+      --pur: #7c3aed;
+      --rul: rgba(0,80,40,0.12);
     }
+ 
     html, body {
-      width: 11in; height: 8.5in;
-      overflow: hidden; background: #888;
+      width: 4608px;
+      height: 3456px;
+      overflow: hidden;
+      background: #888;
       font-family: 'DM Sans', sans-serif;
     }
+ 
     .poster {
-      width: 11in; height: 8.5in;
+      width: 4608px;
+      height: 3456px;
       display: grid;
-      /* 1:2:1 ratio = 2.75in : 5.5in : 2.75in */
-      grid-template-columns: 2.75in 5.5in 2.75in;
-      overflow: hidden; background: #fff;
+      grid-template-columns: 1152px 2304px 1152px;
+      background: #fff;
     }
-    .panel { height: 8.5in; overflow: hidden; display: flex; flex-direction: column; padding: 0.18in 0.17in 0.13in; }
-
+ 
+    .panel {
+      height: 3456px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 96px 88px 80px;
+      position: relative;
+    }
+ 
     /* ── LEFT ── */
-    .L { background: var(--gd); color: #fff; border-right: 1.5px solid var(--gm); }
-    .eyebrow { font-size: 6px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gl); margin-bottom: 5px; }
-    .L h1 { font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.05; margin-bottom: 3px; }
+    .L {
+      background: var(--gd);
+      color: #fff;
+      border-right: 3px solid var(--gm);
+    }
+    .L-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(106,191,138,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(106,191,138,0.05) 1px, transparent 1px);
+      background-size: 96px 96px;
+      pointer-events: none;
+    }
+ 
+    .eyebrow {
+      font-size: 22px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gl); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 18px; position: relative; z-index: 1;
+    }
+    .eyebrow::before {
+      content: ''; display: block; width: 48px; height: 4px;
+      background: var(--gb); border-radius: 2px; flex-shrink: 0;
+    }
+ 
+    .L h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 118px; line-height: 1.0; margin-bottom: 36px;
+      position: relative; z-index: 1;
+    }
     .L h1 em { color: var(--gl); font-style: italic; }
-    .tagline { font-size: 7.5px; color: rgba(255,255,255,0.55); font-weight: 300; line-height: 1.5; margin-bottom: 7px; }
-    .rule { width: 24px; height: 2px; background: var(--gb); border-radius: 1px; margin-bottom: 7px; }
-    .sh { font-size: 6.5px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; margin-bottom: 3px; }
-    .L .sh { color: var(--gl); }
-    .L p { font-size: 7px; line-height: 1.55; color: rgba(255,255,255,0.7); font-weight: 300; margin-bottom: 3px; }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 5px 0; }
-    .sbox { background: rgba(255,255,255,0.06); border: 1px solid rgba(106,191,138,0.2); border-radius: 4px; padding: 5px 6px; }
-    .sbox .v { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--gl); line-height: 1; margin-bottom: 2px; }
-    .sbox .d { font-size: 6px; color: rgba(255,255,255,0.45); line-height: 1.3; font-weight: 300; }
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 3px; }
-    .tag { font-size: 6px; padding: 2px 5px; border-radius: 20px; font-weight: 500; }
-    .tg { background: rgba(45,145,85,0.28); color: var(--gl); border: 1px solid rgba(106,191,138,0.25); }
-    .tt { background: rgba(14,116,144,0.26); color: #7dd3fc; border: 1px solid rgba(14,116,144,0.32); }
-    .ta { background: rgba(180,83,9,0.26); color: #fcd34d; border: 1px solid rgba(180,83,9,0.32); }
-
-    .qr-block { margin-top: auto; padding-top: 7px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .qr-block img { width: 0.85in; height: 0.85in; display: block; image-rendering: pixelated; }
-    .qr-label { font-size: 6px; color: rgba(255,255,255,0.45); text-align: center; line-height: 1.4; }
-    .qr-url { font-size: 5.5px; color: var(--gl); text-align: center; font-weight: 500; word-break: break-all; }
-
+ 
+    .tagline {
+      font-size: 29px; font-weight: 300; color: rgba(255,255,255,0.65);
+      line-height: 1.6; margin-bottom: 48px; position: relative; z-index: 1;
+    }
+ 
+    .rule { width: 60px; height: 4px; background: var(--gb); border-radius: 2px; margin-bottom: 32px; position: relative; z-index: 1; }
+ 
+    .sh-l {
+      font-size: 19px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gl); margin-bottom: 18px; position: relative; z-index: 1;
+    }
+ 
+    .prob-text {
+      font-size: 26px; line-height: 1.62; color: rgba(255,255,255,0.7);
+      font-weight: 300; margin-bottom: 40px; position: relative; z-index: 1;
+    }
+ 
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      margin-bottom: 44px; position: relative; z-index: 1;
+    }
+    .sbox {
+      background: rgba(255,255,255,0.07); border: 2px solid rgba(106,191,138,0.22);
+      border-radius: 12px; padding: 22px 18px;
+    }
+    .sbox .v { font-family: 'DM Serif Display', serif; font-size: 58px; color: var(--gl); line-height: 1; margin-bottom: 8px; }
+    .sbox .d { font-size: 17px; color: rgba(255,255,255,0.5); line-height: 1.4; font-weight: 300; }
+ 
+    .sh-l2 {
+      font-size: 19px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gl); margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 40px; position: relative; z-index: 1; }
+    .tag { font-size: 18px; padding: 7px 16px; border-radius: 30px; font-weight: 500; }
+    .tg { background: rgba(45,145,85,0.28); color: var(--gl); border: 2px solid rgba(106,191,138,0.28); }
+    .tt { background: rgba(14,116,144,0.26); color: #7dd3fc; border: 2px solid rgba(14,116,144,0.32); }
+    .ta { background: rgba(180,83,9,0.26); color: #fcd34d; border: 2px solid rgba(180,83,9,0.32); }
+ 
+    .qr-section {
+      margin-top: auto; padding-top: 32px;
+      border-top: 2px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 28px; position: relative; z-index: 1;
+    }
+    .qr-box {
+      background: #fff; padding: 14px; border-radius: 10px;
+      flex-shrink: 0; width: 196px; height: 196px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-label p { font-size: 20px; color: rgba(255,255,255,0.55); line-height: 1.5; font-weight: 300; margin-bottom: 8px; }
+    .qr-label strong { font-size: 18px; color: var(--gl); font-weight: 600; word-break: break-all; }
+ 
+    .attr {
+      padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.08);
+      margin-top: 20px; position: relative; z-index: 1;
+    }
+    .attr p { font-size: 18px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+    .attr strong { color: rgba(255,255,255,0.65); }
+ 
     /* ── CENTER ── */
-    .C { background: #fff; border-right: 1.5px solid var(--rul); }
-    .C-header { background: var(--gm); margin: -0.18in -0.17in 0.1in; padding: 0.08in 0.17in; }
-    .C-header h2 { font-family: 'DM Serif Display', serif; font-size: 13px; color: #fff; line-height: 1.15; }
-    .C-header p { font-size: 6.5px; color: rgba(255,255,255,0.55); margin-top: 2px; font-weight: 300; }
-    .C .sh { color: var(--gm); margin-bottom: 3px; }
-    .c-intro { font-size: 6.8px; color: var(--isf); line-height: 1.5; margin-bottom: 6px; }
-
-    /* cascade */
-    .cascade { display: flex; flex-direction: column; gap: 0; margin-bottom: 7px; }
+    .C {
+      background: var(--gg); color: var(--ink);
+      border-right: 3px solid var(--rul);
+      padding: 0 96px 80px;
+    }
+ 
+    .c-header {
+      background: var(--gm); margin: 0 -96px 56px;
+      padding: 52px 96px 48px;
+    }
+    .c-header h2 {
+      font-family: 'DM Serif Display', serif; font-size: 68px;
+      color: #fff; line-height: 1.08; margin-bottom: 14px;
+    }
+    .c-header p { font-size: 26px; color: rgba(255,255,255,0.62); font-weight: 300; line-height: 1.5; }
+ 
+    .sh-c {
+      font-size: 19px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gm); margin-bottom: 18px;
+    }
+ 
+    .c-intro { font-size: 25px; color: var(--isf); line-height: 1.6; margin-bottom: 36px; }
+ 
+    .spec-banner {
+      background: #fffbeb; border: 2px solid rgba(180,83,9,0.25);
+      border-left: 6px solid var(--am); border-radius: 8px;
+      padding: 18px 22px; margin-bottom: 36px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .spec-banner .si { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+    .spec-banner p { font-size: 20px; color: #78350f; line-height: 1.55; }
+    .spec-banner strong { color: var(--am); font-weight: 700; }
+ 
+    .cascade { display: flex; flex-direction: column; gap: 0; margin-bottom: 52px; }
     .cstep { display: flex; align-items: stretch; gap: 0; }
-    .cnum { width: 16px; min-width: 16px; display: flex; flex-direction: column; align-items: center; padding-top: 5px; }
-    .ccirc { width: 13px; height: 13px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 6px; font-weight: 700; color: #fff; flex-shrink: 0; z-index: 1; }
-    .cline { width: 2px; flex: 1; min-height: 3px; margin: 0 auto; }
-    .cbody { flex: 1; background: var(--gg); border: 1px solid var(--rul); border-radius: 3px; padding: 3px 6px; margin-bottom: 2px; margin-left: 3px; }
-    .cbody h4 { font-size: 6.8px; font-weight: 700; color: var(--ink); margin-bottom: 1px; }
-    .cbody .sp { font-size: 6px; font-style: italic; color: var(--gm); margin-bottom: 1px; }
-    .cbody p { font-size: 6.2px; color: var(--isf); line-height: 1.45; }
-    .pbadge { display: inline-block; font-size: 5.5px; padding: 1px 4px; border-radius: 2px; background: var(--al); color: var(--am); border: 1px solid rgba(180,83,9,0.18); font-weight: 600; margin-top: 1px; }
-    .spec-pill { display: inline-block; font-size: 5.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 4px; border-radius: 2px; background: #fffbeb; color: var(--am); border: 1px solid rgba(180,83,9,0.3); margin-left: 3px; vertical-align: middle; }
-    .s1 .ccirc, .s1 .cline { background: #1a5c38; }
-    .s2 .ccirc, .s2 .cline { background: #0e7490; }
-    .s3 .ccirc, .s3 .cline { background: #7c3aed; }
-    .s4 .ccirc { background: #92400e; }
-    .cbody.speculative { border-color: rgba(180,83,9,0.22); background: #fffdf7; }
-
-    /* organism table */
-    .otbl { width: 100%; border-collapse: collapse; margin-top: 2px; }
-    .otbl th { font-size: 5.8px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--isf); border-bottom: 1.5px solid var(--gm); padding: 2px 3px; text-align: left; }
-    .otbl td { font-size: 6.2px; padding: 1.8px 3px; border-bottom: 0.5px solid var(--rul); color: var(--ink); vertical-align: top; line-height: 1.3; }
-    .otbl td em { font-style: italic; color: var(--gm); }
-    .role { background: var(--gp); color: var(--gm); border-radius: 2px; padding: 0px 3px; font-size: 5.5px; font-weight: 600; white-space: nowrap; }
-    .rteal { background: var(--tl); color: var(--tk); }
-    .mod { font-size: 6.5px; color: var(--gb); font-weight: 700; text-align: center; }
-    .mod-n { font-size: 6px; color: #bbb; text-align: center; }
-
+    .cnum { width: 52px; min-width: 52px; display: flex; flex-direction: column; align-items: center; padding-top: 14px; }
+    .ccirc { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #fff; flex-shrink: 0; z-index: 1; }
+    .cline { width: 3px; flex: 1; min-height: 10px; margin: 0 auto; }
+    .cbody { flex: 1; background: #fff; border: 2px solid var(--rul); border-radius: 10px; padding: 14px 22px; margin-bottom: 9px; margin-left: 12px; }
+    .cbody h4 { font-size: 25px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .cbody .sp { font-size: 19px; font-style: italic; color: var(--gm); margin-bottom: 5px; }
+    .cbody p { font-size: 21px; color: var(--isf); line-height: 1.5; }
+    .spec-pill { display: inline-block; font-size: 15px; font-weight: 700; padding: 2px 9px; border-radius: 4px; background: #fffbeb; color: var(--am); border: 1px solid rgba(180,83,9,0.3); margin-left: 7px; vertical-align: middle; }
+ 
+    .s1c .ccirc, .s1c .cline { background: var(--gm); }
+    .s2c .ccirc, .s2c .cline { background: var(--tk); }
+    .s3c .ccirc, .s3c .cline { background: var(--pur); }
+    .s4c .ccirc { background: #92400e; }
+ 
+    .ctbl { width: 100%; border-collapse: collapse; }
+    .ctbl th { font-size: 18px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--isf); border-bottom: 3px solid var(--gm); padding: 10px 12px; text-align: left; background: var(--gg); }
+    .ctbl td { font-size: 20px; padding: 9px 12px; border-bottom: 1px solid var(--rul); vertical-align: top; color: var(--ink); line-height: 1.32; }
+    .ctbl td em { font-style: italic; color: var(--gm); }
+    .ctbl tr:nth-child(even) td { background: rgba(240,250,244,0.55); }
+    .role-tag { display: inline-block; font-size: 17px; font-weight: 600; padding: 3px 9px; border-radius: 5px; background: var(--gp); color: var(--gm); white-space: nowrap; }
+    .role-teal { background: var(--tl); color: var(--tk); }
+    .mod-check { text-align: center; color: var(--gb); font-weight: 700; }
+    .mod-none { text-align: center; color: #bbb; }
+ 
     /* ── RIGHT ── */
-    .R { background: var(--gg); }
-    .R .sh { color: var(--gm); }
-    .R p { font-size: 7px; line-height: 1.55; color: var(--isf); margin-bottom: 3px; }
-
-    /* protein boxes */
-    .pbox { border-radius: 4px; padding: 5px 7px; margin-bottom: 4px; }
-    .pbox h4 { font-size: 7px; font-weight: 700; margin-bottom: 2px; }
-    .pbox ul { list-style: none; padding: 0; }
-    .pbox li { font-size: 6.2px; line-height: 1.45; padding-left: 8px; position: relative; margin-bottom: 1px; }
-    .pbox li::before { content: '◆'; position: absolute; left: 0; font-size: 4px; top: 2px; }
-    .pbox-amber { background: var(--al); border: 1px solid rgba(180,83,9,0.18); }
-    .pbox-amber h4, .pbox-amber li::before { color: var(--am); }
-    .pbox-amber li { color: #78350f; }
-    .pbox-teal { background: var(--tl); border: 1px solid rgba(14,116,144,0.2); }
-    .pbox-teal h4, .pbox-teal li::before { color: var(--tk); }
-    .pbox-teal li { color: #164e63; }
-    .pbox-spec-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
-    .pbox-spec-header h4 { margin-bottom: 0; }
-    .spec-note { font-size: 5.5px; color: var(--am); font-weight: 600; border: 1px solid rgba(180,83,9,0.25); border-radius: 2px; padding: 1px 4px; background: rgba(255,251,235,0.8); white-space: nowrap; }
-
-    /* efficacy bars */
-    .irow { display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
-    .ilbl { font-size: 6px; color: var(--ims); width: 90px; flex-shrink: 0; line-height: 1.3; }
-    .ibw { flex: 1; height: 5px; background: rgba(45,145,85,0.12); border-radius: 3px; overflow: hidden; }
-    .ib { height: 100%; background: var(--gb); border-radius: 3px; }
-    .ibt { background: var(--tk); }
-    .ipct { font-size: 6px; font-weight: 600; color: var(--gm); width: 20px; text-align: right; }
-    .ipct-t { color: var(--tk); }
-
-    /* spec banner */
-    .spec-banner { background: #fffbeb; border: 1px solid rgba(180,83,9,0.3); border-left: 3px solid var(--am); border-radius: 3px; padding: 3px 6px; margin-bottom: 5px; display: flex; align-items: flex-start; gap: 4px; }
-    .spec-banner .spec-icon { font-size: 8px; flex-shrink: 0; }
-    .spec-banner p { font-size: 6px; color: #78350f; line-height: 1.45; margin: 0; }
-    .spec-banner strong { font-weight: 700; color: var(--am); }
-
-    /* references footer */
-    .rfooter { margin-top: auto; padding-top: 5px; border-top: 1px solid var(--rul); }
-    .rfooter p { font-size: 5.8px; color: #aaa; line-height: 1.5; }
-    .rfooter a { color: var(--gm); text-decoration: none; }
-    .rfooter strong { color: var(--isf); font-weight: 600; }
-
-    /* adv cards */
-    .icard { border: 1px solid var(--rul); border-radius: 4px; padding: 4px 6px 4px 9px; margin-bottom: 3px; position: relative; overflow: hidden; background: #fff; }
-    .icard::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; border-radius: 4px 0 0 4px; }
-    .ig::before { background: var(--gb); }
-    .it::before { background: var(--tk); }
-    .ip::before { background: var(--pur); }
-    .ia::before { background: var(--am); }
-    .icard h4 { font-size: 6.5px; font-weight: 700; color: var(--ink); margin-bottom: 1px; }
-    .icard p { font-size: 6px; color: var(--isf); line-height: 1.45; margin: 0; }
-
+    .R { background: #fff; color: var(--ink); }
+ 
+    .sh-r { font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gm); margin-bottom: 18px; }
+ 
+    .intro-r { font-size: 23px; color: var(--isf); line-height: 1.6; margin-bottom: 26px; }
+ 
+    .protein-card { border-radius: 12px; padding: 24px 24px 24px 30px; margin-bottom: 16px; position: relative; overflow: hidden; }
+    .protein-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 6px; border-radius: 12px 0 0 12px; }
+    .pc-amber { background: var(--al); border: 2px solid rgba(180,83,9,0.18); }
+    .pc-amber::before { background: var(--am); }
+    .pc-teal { background: var(--tl); border: 2px solid rgba(14,116,144,0.18); }
+    .pc-teal::before { background: var(--tk); }
+    .unv { float: right; font-size: 15px; font-weight: 700; padding: 2px 9px; border-radius: 4px; margin-top: 2px; }
+    .pc-amber .unv { background: rgba(180,83,9,0.12); color: var(--am); border: 1px solid rgba(180,83,9,0.28); }
+    .pc-teal .unv { background: rgba(14,116,144,0.12); color: var(--tk); border: 1px solid rgba(14,116,144,0.28); }
+    .protein-card h4 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+    .protein-card .host { font-size: 19px; font-style: italic; color: var(--gm); margin-bottom: 10px; display: block; }
+    .protein-card ul { list-style: none; padding: 0; }
+    .protein-card li { font-size: 19px; line-height: 1.48; padding-left: 18px; position: relative; margin-bottom: 5px; color: var(--ims); }
+    .protein-card li::before { content: '◆'; position: absolute; left: 0; font-size: 10px; top: 5px; }
+    .pc-amber li::before { color: var(--am); }
+    .pc-teal li::before { color: var(--tk); }
+ 
+    .adv-card { border-radius: 10px; padding: 20px 20px 20px 28px; margin-bottom: 14px; position: relative; overflow: hidden; background: #fff; border: 2px solid var(--rul); }
+    .adv-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; border-radius: 10px 0 0 10px; }
+    .adv-g::before { background: var(--gb); }
+    .adv-t::before { background: var(--tk); }
+    .adv-p::before { background: var(--pur); }
+    .adv-a::before { background: var(--am); }
+    .adv-card h4 { font-size: 23px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .adv-card p { font-size: 20px; line-height: 1.52; color: var(--isf); }
+ 
+    .eff-row { display: flex; align-items: center; gap: 18px; margin-bottom: 14px; }
+    .eff-lbl { font-size: 21px; color: var(--isf); width: 300px; flex-shrink: 0; line-height: 1.3; }
+    .eff-bar { flex: 1; height: 18px; background: var(--gp); border-radius: 9px; overflow: hidden; }
+    .eff-fill { height: 100%; border-radius: 9px; background: var(--gb); }
+    .eff-fill-t { background: var(--tk); }
+    .eff-pct { font-size: 21px; font-weight: 700; color: var(--gm); width: 68px; text-align: right; }
+    .eff-pct-t { color: var(--tk); }
+    .eff-note { font-size: 17px; color: #aaa; margin-top: 6px; margin-bottom: 24px; }
+ 
+    .refs-section { margin-top: auto; padding-top: 28px; border-top: 3px solid var(--rul); }
+    .ref-line { font-size: 17px; color: #888; line-height: 1.5; margin-bottom: 7px; padding-left: 14px; border-left: 3px solid var(--gb); }
+    .ref-line em { font-style: italic; }
+    .ref-line a { color: var(--gl); text-decoration: none; }
+ 
+    .r-footer { padding-top: 20px; border-top: 2px solid var(--rul); margin-top: 16px; }
+    .r-footer p { font-size: 17px; color: #bbb; line-height: 1.55; }
+    .r-footer strong { color: rgba(180,83,9,0.85); }
+ 
     @media print {
       html, body { background: none; }
-      .poster { width: 11in; height: 8.5in; }
-      @page { size: 11in 8.5in landscape; margin: 0; }
+      @page { size: 48in 36in landscape; margin: 0; }
     }
   </style>
 </head>
 <body>
 <div class="poster">
-
-<!-- ════════ LEFT ════════ -->
-<div class="panel L">
-  <div class="eyebrow">ASU Change the World · 2026</div>
-  <h1>Living to<br><em>Clean</em><br>the World</h1>
-  <p class="tagline">A directed multi-kingdom microbial consortium<br>targeting 13 priority pollutant classes</p>
-  <div class="rule"></div>
-
-  <div class="sh">The Problem</div>
-  <p>Thousands of Superfund sites, legacy industrial zones, and agricultural areas hold complex mixtures of heavy metals, solvents, petroleum, pesticides, pharmaceuticals, and more. No single organism can tackle them all — and chemical remediation often moves contaminants rather than destroying them.</p>
-
-  <div class="stat-grid">
-    <div class="sbox"><div class="v">1,340</div><div class="d">Active EPA Superfund sites (GAO 2025)</div></div>
-    <div class="sbox"><div class="v">13</div><div class="d">Pollutant classes targeted simultaneously</div></div>
-    <div class="sbox"><div class="v">14</div><div class="d">Organisms — fungi and bacteria, each a specialist</div></div>
-    <div class="sbox"><div class="v">3</div><div class="d">Novel computationally-derived proteins</div></div>
-  </div>
-
-  <div class="rule"></div>
-  <div class="sh">Pollutants Targeted</div>
-  <div class="tag-cloud">
-    <span class="tag tg">Heavy metals</span>
-    <span class="tag tg">Mercury &amp; MeHg</span>
-    <span class="tag tg">PAHs</span>
-    <span class="tag tt">Chlorinated solvents</span>
-    <span class="tag tt">PCBs &amp; dioxins</span>
-    <span class="tag tt">Petroleum / crude oil</span>
-    <span class="tag ta">Pesticides &amp; herbicides</span>
-    <span class="tag ta">Pharmaceuticals / EDCs</span>
-    <span class="tag ta">Plastics (LDPE, PU)</span>
-    <span class="tag tg">Radionuclides</span>
-    <span class="tag tt">TNT &amp; nitroaromatics</span>
-    <span class="tag ta">Industrial dyes</span>
-    <span class="tag tg">Arsenic &amp; chromium</span>
-  </div>
-
-  <div class="qr-block">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAIAAABnRsZeAAAHqUlEQVR4nO3dwW1kRRhGUYxYOQbH4JiIAGKBCAiVLRKoJKZuqf7Xfc7e7tftnqtafKr5+Pz++gmg8/PtBwBejawAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiv+z88K9//FY9xxB//f7nD//szqexft1bn/O7PdWtv/5MO5+G0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKENta2a7trPTOObeGPLfRfL2167nvxs5TnXvmd/u34LQCxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsQOrmzXZq5dd8y8y/bW9nfmb1574jdn7dY7cloBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWLXVrav59YtqrfuZz23Dd155pmf1btxWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYla2mXNL2bUn/uYdtrDzOa0AMVkBYrICxGQFiMkKEJMVICYrQExWgJisALFrK9snriHP7Up39qzn7na95d3uo535VDucVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaA2MGV7cwF5znnlrI7zt2w+8SfXTv3N3q3fwtOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitA7OPz++v2M7yIWzfd7ni3Z369W2NncloBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWJbd9neuvvz3G2mM+9YXZv5fme6tSp+vU9yzWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYhtrWx37Owdb617z7m1G94xc2O949x38pZb3xynFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUg9vH5/XX7Gf7D6+1od7zeBndt5vt94gL71g27TitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQOzaXbZr59afT7zbdccT75Sd6dba9dxvPsdpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIXVvZntv/3bq/89be8db73XFrsbpj5l9wJqcVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSC2tbKdueBcO3e36znvdv/uTOe2sDNXxTucVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaA2Mfn99cP//C5jebM3eHrLXRnbjSfeNPtObf+He1wWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYlt32c50bpV4a7N4bjk6c688c5G8NnNxfovTChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQu7ayfb0bSc891RM/q5315847euIm9YnPvOa0AsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEPj6/v374h9/tFtUn7h13nPv73nLrHZ3bSc/8nJ1WgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoDY1sp2beai8dbrzlwV7zi3/pz5Fzz3ujtmfnOcVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaA2LWV7cz158yd5evtWc+Z+a1be+I3Z81pBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIHVzZzjRzg/vEe3BnfpJrt1ant9z6nJ1WgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoDYtbtsd8xcQz7xNtO1mXesuq32n2b+K3NaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiv+z88MxbVG+59cznVqczd6Vrt/a7t/6+a7ee2WkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYg98i7btXO70lubxVvb0FsL3Vue+FnNvPfXaQWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiB28y/bchm9nlfjEu06f+Mxr51731tr11mc1k9MKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChA7eJft63m3tevazHe0NvPm15mr4p3f7LQCxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsQO3mX7ROtloR1t9bMzF6vnXvfW+935Pu9wWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYlsr27WZ/9P9zOXozC3sOe+2z575m91lCzyGrAAxWQFisgLEZAWIyQoQkxUgJitATFaA2MGV7drM21t3fvOt20zXdj7nW9vftSd+kuded+aW3WkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYhdW9k+0c7ecebqdP1Ut3alt9a951731j771kLXaQWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiFnZ/g8zd7Qz7zrdeeZz7+iJi9Wd1731zXFaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiH5/fXz/8wzP3nWsz7w09dwPrrfd7y8x3NPPfwjlOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitA7OBdtjNXmDtuvaNb96Suzdyz3nrdW5/GzHuOnVaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgNjWXbYA/+a0AsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEPsbeVHRe0DF/csAAAAASUVORK5CYII=" alt="QR code — full project site">
-    <div class="qr-label">Scan for full project details,<br>species profiles &amp; citations</div>
-    <div class="qr-url">vyrqel.github.io/living-to-clean-2026</div>
-  </div>
-</div>
-
-<!-- ════════ CENTER ════════ -->
-<div class="panel C">
-  <div class="C-header">
-    <h2>Living to Clean the World</h2>
-    <p>A directed multi-kingdom microbial consortium — ASU Change the World 2026 · Colin Moyer</p>
-  </div>
-
-  <div class="sh">★ Centerpiece: Inter-Species Mercury Trafficking Cascade</div>
-  <p class="c-intro">A proposed 4-stage pipeline designed to eliminate atmospheric Hg⁰ volatilization and concentrate Hg²⁺ in harvestable fungal biomass.</p>
-
-  <div class="spec-banner">
-    <span class="spec-icon">⚠</span>
-    <p><strong>Computational proposal — not experimentally validated.</strong> The inter-species cascade and all novel protein designs (Atx1-Hg, CusA-Hg, CusF-Hg) are theoretical, grounded in structural biochemistry and HSAB principles.</p>
-  </div>
-
-  <div class="cascade">
-    <div class="cstep s1">
-      <div class="cnum"><div class="ccirc">1</div><div class="cline"></div></div>
-      <div class="cbody">
-        <div class="sp"><em>Metarhizium robertsii</em> (ΔMIR) <span class="spec-pill">lit. basis</span></div>
-        <h4>Demethylation</h4>
-        <p>MMD enzyme (PNAS 2022) converts methylmercury → Hg²⁺. MIR deletion blocks Hg⁰ escape.</p>
+ 
+  <!-- ══ LEFT ══ -->
+  <div class="panel L">
+    <div class="L-bg"></div>
+ 
+    <div class="eyebrow">ASU Change the World · 2026</div>
+ 
+    <h1>Living to<br><em>Clean</em><br>the World</h1>
+ 
+    <p class="tagline">A directed multi-kingdom microbial consortium targeting 13 priority pollutant classes — fungi and bacteria, each a specialist, working as one.</p>
+ 
+    <div class="rule"></div>
+ 
+    <div class="sh-l">The Problem</div>
+    <p class="prob-text">Over 1,340 active Superfund sites hold complex mixtures of heavy metals, solvents, petroleum, pesticides, pharmaceuticals, and more. Chemical remediation moves contaminants rather than destroying them. No single organism handles the full contamination spectrum — this consortium does.</p>
+ 
+    <div class="stat-grid">
+      <div class="sbox"><div class="v">1,340</div><div class="d">Active EPA Superfund sites (GAO, 2025)</div></div>
+      <div class="sbox"><div class="v">13</div><div class="d">Priority pollutant classes targeted simultaneously</div></div>
+      <div class="sbox"><div class="v">14</div><div class="d">Specialist organisms across two kingdoms</div></div>
+      <div class="sbox"><div class="v">$60–90B</div><div class="d">Estimated total U.S. legacy cleanup costs</div></div>
+    </div>
+ 
+    <div class="sh-l2">Pollutants Targeted</div>
+    <div class="tag-cloud">
+      <span class="tag tg">Heavy metals</span>
+      <span class="tag tg">Mercury &amp; MeHg</span>
+      <span class="tag tg">PAHs</span>
+      <span class="tag tt">Chlorinated solvents</span>
+      <span class="tag tt">PCBs &amp; dioxins</span>
+      <span class="tag tt">Petroleum / crude oil</span>
+      <span class="tag ta">Pesticides &amp; herbicides</span>
+      <span class="tag ta">Pharmaceuticals / EDCs</span>
+      <span class="tag ta">Plastics (LDPE, PU)</span>
+      <span class="tag tg">Radionuclides</span>
+      <span class="tag tt">TNT &amp; nitroaromatics</span>
+      <span class="tag ta">Industrial dyes</span>
+      <span class="tag tg">Arsenic &amp; chromium</span>
+    </div>
+ 
+    <div class="qr-section">
+      <div class="qr-box" id="qrcode"></div>
+      <div class="qr-label">
+        <p>Scan for the full interactive site — species profiles, protein designs, citations, and more.</p>
+        <strong>vyrqel.github.io/living-to-clean-2026</strong>
       </div>
     </div>
-    <div class="cstep s2">
-      <div class="cnum"><div class="ccirc">2</div><div class="cline"></div></div>
-      <div class="cbody speculative">
-        <div class="sp"><em>Cupriavidus metallidurans</em> (ΔmerA) <span class="spec-pill">speculative</span></div>
-        <h4>Hg²⁺ Export</h4>
-        <p>CusA-Hg/CusF-Hg efflux system exports Hg²⁺ extracellularly. Protein designs computationally derived.</p>
-        <span class="pbadge">CusA-Hg / CusF-Hg — unvalidated</span>
-      </div>
-    </div>
-    <div class="cstep s3">
-      <div class="cnum"><div class="ccirc">3</div><div class="cline"></div></div>
-      <div class="cbody speculative">
-        <div class="sp"><em>Aspergillus niger</em> (Atx1-Hg) <span class="spec-pill">speculative</span></div>
-        <h4>Extracellular Capture</h4>
-        <p>Atx1-Hg captures extracellular Hg²⁺ and shuttles it inward. Binding motif redesign is theoretical.</p>
-        <span class="pbadge">Atx1-Hg — unvalidated</span>
-      </div>
-    </div>
-    <div class="cstep s4">
-      <div class="cnum"><div class="ccirc">4</div></div>
-      <div class="cbody">
-        <div class="sp"><em>Aspergillus niger</em> (MT2A / PgpdA) <span class="spec-pill">lit. basis</span></div>
-        <h4>Sequestration &amp; Harvest</h4>
-        <p>MT2A metallothionein constitutively expressed. Biomass harvested to remove mercury from system.</p>
-      </div>
+ 
+    <div class="attr">
+      <p><strong>Colin Moyer</strong> — Student, ASU Change the World 2026</p>
+      <p>Sources: EPA CERCLA · ATSDR 2022 SPL · EPA HAPs · PNAS 2022 (Wu et al.) · GAO-25-108408</p>
     </div>
   </div>
-
-  <div class="sh">Full Consortium — All 14 Members</div>
-  <table class="otbl">
-    <thead>
-      <tr><th>Organism</th><th>Primary Role</th><th style="text-align:center">Mod</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><em>P. chrysosporium</em></td><td><span class="role">PAHs, chlorinated, dioxins</span></td><td class="mod-n">—</td></tr>
-      <tr><td><em>T. versicolor</em></td><td><span class="role">Pharmaceuticals / EDCs</span></td><td class="mod-n">—</td></tr>
-      <tr><td><em>P. ostreatus</em></td><td><span class="role">PAHs, plastics, metals</span></td><td class="mod-n">—</td></tr>
-      <tr><td><em>A. niger</em></td><td><span class="role">Hg²⁺ terminal capture sink</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>M. robertsii</em></td><td><span class="role">MeHg demethylation</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>F. oxysporum</em></td><td><span class="role">Dioxins + fungal highway</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>B. adusta</em></td><td><span class="role">Pharma / EDC specialist</span></td><td class="mod-n">—</td></tr>
-      <tr><td><em>M. hiemalis</em></td><td><span class="role">Acetaminophen, PCPs</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>Trichoderma spp.</em></td><td><span class="role">Arsenic, metals, scaffold</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>P. chrysogenum</em></td><td><span class="role">Pb, Cd, phenols</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>Pseudomonas spp.</em></td><td><span class="role rteal">BTEX, petroleum hydrocarbons</span></td><td class="mod-n">—</td></tr>
-      <tr><td><em>Dehalococcoides</em></td><td><span class="role rteal">TCE / PCE → non-toxic ethene</span></td><td class="mod-n">—</td></tr>
-      <tr><td><em>C. metallidurans</em></td><td><span class="role rteal">Multi-metal resistance</span></td><td class="mod">✓</td></tr>
-      <tr><td><em>S. pasteurii</em></td><td><span class="role rteal">Metal locking via MICP</span></td><td class="mod-n">—</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- ════════ RIGHT ════════ -->
-<div class="panel R">
-  <div class="sh">Novel Engineered Proteins — Computational Proposals</div>
-
-  <div class="spec-banner" style="margin-bottom:4px;">
-    <span class="spec-icon">⚠</span>
-    <p><strong>No experimental validation.</strong> Protein designs are theoretical — derived from structural biochemistry, HSAB principles, and homology to characterized systems. Not yet synthesized, expressed, or assayed.</p>
+ 
+  <!-- ══ CENTER ══ -->
+  <div class="panel C">
+    <div class="c-header">
+      <h2>Living to Clean the World</h2>
+      <p>A multi-kingdom bioremediation consortium — 14 organisms engineered to cooperate, each targeting what it does best</p>
+    </div>
+ 
+    <div class="sh-c">★ Centerpiece: Inter-Species Mercury Trafficking Cascade</div>
+    <p class="c-intro">A proposed 4-stage pipeline to eliminate Hg⁰ volatilization and concentrate Hg²⁺ in harvestable fungal biomass. <strong style="color:var(--am);">Computational proposal — not experimentally validated.</strong></p>
+ 
+    <div class="spec-banner">
+      <span class="si">⚠</span>
+      <p><strong>Scientific Integrity Disclosure:</strong> The mercury cascade and all novel protein designs (Atx1-Hg, CusA-Hg, CusF-Hg) are theoretical proposals grounded in structural biochemistry and HSAB principles. No in vitro or in vivo testing has been performed. All other consortium members are characterized organisms with published literature support.</p>
+    </div>
+ 
+    <div class="cascade">
+      <div class="cstep s1c">
+        <div class="cnum"><div class="ccirc">1</div><div class="cline"></div></div>
+        <div class="cbody">
+          <div class="sp"><em>Metarhizium robertsii</em> (ΔMIR) <span class="spec-pill">lit. basis</span></div>
+          <h4>Demethylation</h4>
+          <p>MMD enzyme (PNAS 2022) converts methylmercury → Hg²⁺. MIR deletion prevents Hg⁰ escape.</p>
+        </div>
+      </div>
+      <div class="cstep s2c">
+        <div class="cnum"><div class="ccirc">2</div><div class="cline"></div></div>
+        <div class="cbody" style="border-color:rgba(180,83,9,0.2);background:#fffdf7;">
+          <div class="sp"><em>Cupriavidus metallidurans</em> (ΔmerA) <span class="spec-pill">speculative</span></div>
+          <h4>Hg²⁺ Export</h4>
+          <p>CusA-Hg / CusF-Hg efflux system (novel engineered proteins) exports Hg²⁺ extracellularly into the shared pool.</p>
+        </div>
+      </div>
+      <div class="cstep s3c">
+        <div class="cnum"><div class="ccirc">3</div><div class="cline"></div></div>
+        <div class="cbody" style="border-color:rgba(180,83,9,0.2);background:#fffdf7;">
+          <div class="sp"><em>Aspergillus niger</em> (Atx1-Hg) <span class="spec-pill">speculative</span></div>
+          <h4>Extracellular Capture</h4>
+          <p>Atx1-Hg (novel chaperone) captures extracellular Hg²⁺ and shuttles it into fungal cells for sequestration.</p>
+        </div>
+      </div>
+      <div class="cstep s4c">
+        <div class="cnum"><div class="ccirc">4</div></div>
+        <div class="cbody">
+          <div class="sp"><em>Aspergillus niger</em> (MT2A / PgpdA) <span class="spec-pill">lit. basis</span></div>
+          <h4>Sequestration &amp; Harvest</h4>
+          <p>MT2A metallothionein constitutively sequesters Hg²⁺. Fungal biomass harvested to remove mercury from the system permanently.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="sh-c">Full Consortium — All 14 Members</div>
+    <table class="ctbl">
+      <thead>
+        <tr><th>Organism</th><th>Primary Role</th><th style="text-align:center;">Mod</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>P. chrysosporium</em></td><td><span class="role-tag">PAHs, chlorinated, dioxins</span></td><td class="mod-none">—</td></tr>
+        <tr><td><em>T. versicolor</em></td><td><span class="role-tag">Pharmaceuticals / EDCs</span></td><td class="mod-none">—</td></tr>
+        <tr><td><em>P. ostreatus</em></td><td><span class="role-tag">PAHs, plastics, metals</span></td><td class="mod-none">—</td></tr>
+        <tr><td><em>A. niger</em></td><td><span class="role-tag">Hg²⁺ terminal capture sink</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>M. robertsii</em></td><td><span class="role-tag">MeHg demethylation</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>F. oxysporum</em></td><td><span class="role-tag">Dioxins + fungal highway</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>B. adusta</em></td><td><span class="role-tag">Pharma / EDC specialist</span></td><td class="mod-none">—</td></tr>
+        <tr><td><em>M. hiemalis</em></td><td><span class="role-tag">Acetaminophen, PCPs</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>Trichoderma spp.</em></td><td><span class="role-tag">Arsenic, metals, scaffold</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>P. chrysogenum</em></td><td><span class="role-tag">Pb, Cd, phenols</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>Pseudomonas spp.</em></td><td><span class="role-tag role-teal">BTEX, petroleum hydrocarbons</span></td><td class="mod-none">—</td></tr>
+        <tr><td><em>Dehalococcoides spp.</em></td><td><span class="role-tag role-teal">TCE / PCE → non-toxic ethene</span></td><td class="mod-none">—</td></tr>
+        <tr><td><em>C. metallidurans</em></td><td><span class="role-tag role-teal">Multi-metal resistance</span></td><td class="mod-check">✓</td></tr>
+        <tr><td><em>S. pasteurii</em></td><td><span class="role-tag role-teal">Metal locking via MICP</span></td><td class="mod-none">—</td></tr>
+      </tbody>
+    </table>
   </div>
-
-  <div class="pbox pbox-amber">
-    <div class="pbox-spec-header">
+ 
+  <!-- ══ RIGHT ══ -->
+  <div class="panel R">
+ 
+    <div class="sh-r">Novel Engineered Proteins</div>
+    <p class="intro-r">Three computationally-derived proteins designed from structural biochemistry and HSAB (Hard-Soft Acid-Base) principles. <strong style="color:var(--am);">Not yet synthesized or experimentally validated.</strong></p>
+ 
+    <div class="protein-card pc-amber">
+      <span class="unv">UNVALIDATED</span>
       <h4>Atx1-Hg — Hg²⁺ Chaperone (<em>A. niger</em>)</h4>
-      <span class="spec-note">UNVALIDATED</span>
+      <span class="host">Modified copper chaperone retargeted for extracellular Hg²⁺ capture</span>
+      <ul>
+        <li>MxCxxC → MCxCC: tricoordinate Hg²⁺ binding site (MerR template, C82/C117/C126)</li>
+        <li>Gly spacers allow backbone flexibility for Hg²⁺-preferred linear/trigonal geometry</li>
+        <li>Interaction surface redesigned to dock MT2A rather than native Cu-ATPases</li>
+      </ul>
     </div>
-    <ul>
-      <li>MxCxxC → MCxCC motif: third Cys added, spacing reduced — tricoordinate Hg²⁺ binding site</li>
-      <li>Gly spacers allow backbone flexibility for Hg²⁺-preferred linear/trigonal geometry</li>
-      <li>Interaction surface redesigned to dock MT2A instead of native Cu-ATPases</li>
-      <li>Template: MerR C82/C117/C126 coordination geometry (experimentally characterized)</li>
-    </ul>
-  </div>
-
-  <div class="pbox pbox-teal">
-    <div class="pbox-spec-header">
+ 
+    <div class="protein-card pc-teal">
+      <span class="unv">UNVALIDATED</span>
       <h4>CusA-Hg &amp; CusF-Hg — Hg²⁺ Efflux (<em>C. metallidurans</em>)</h4>
-      <span class="spec-note" style="color:var(--tk);border-color:rgba(14,116,144,0.3);background:rgba(224,242,254,0.8);">UNVALIDATED</span>
+      <span class="host">RND efflux system retargeted from Cu⁺/Ag⁺ selectivity to Hg²⁺</span>
+      <ul>
+        <li>CusA-Hg: Met relay → Cys (M573C, M623C, M672C) — contiguous thiolate-lined channel</li>
+        <li>CusF-Hg: HxMxM → HxCxC — Hg²⁺-selective from the periplasmic entry point</li>
+        <li>Basis: HSAB theory — Hg²⁺ (soft acid) has extreme thiolate (soft base) affinity</li>
+      </ul>
     </div>
-    <ul>
-      <li>CusA-Hg: transmembrane Met relay → Cys (M573C, M623C, M672C) — continuous thiolate channel</li>
-      <li>CusF-Hg: periplasmic chaperone HxMxM → HxCxC — Hg²⁺-selective from entry point</li>
-      <li>Basis: HSAB theory — Hg²⁺ (soft acid) has extreme thiolate (soft base) affinity</li>
-    </ul>
-  </div>
-
-  <div class="sh" style="margin-top:5px;">Competitive Advantages</div>
-  <div class="icard ig">
-    <h4>Multi-Kingdom Architecture</h4>
-    <p>Fungi (hyphal scaffold + extracellular enzymes) paired with bacteria (metabolic versatility, anaerobic capability) for complementary attack across all contamination zones simultaneously.</p>
-  </div>
-  <div class="icard it">
-    <h4>Fungal Highways</h4>
-    <p><em>Fusarium</em> and <em>Trichoderma</em> hyphae act as physical conduits letting specialist bacteria reach otherwise inaccessible deep zones in contaminated soil.</p>
-  </div>
-  <div class="icard ip">
-    <h4>Zero Volatilization Design</h4>
-    <p>All Hg⁰-producing pathways deleted (MIR in <em>M. robertsii</em>; MerA in <em>C. metallidurans</em>). Mercury stays in the system — concentrated, captured, and harvested.</p>
-  </div>
-  <div class="icard ia">
-    <h4>Consortium Compatibility Engineering</h4>
-    <p><em>Trichoderma</em> peptaibol synthetase + chitinase genes deleted. <em>Penicillium</em> pcb cluster deleted to protect bacterial members. Engineered to cooperate, not compete.</p>
-  </div>
-
-  <div class="sh" style="margin-top:5px;">Representative Efficacy (Literature)</div>
-  <div class="irow"><div class="ilbl">Petroleum hydrocarbons</div><div class="ibw"><div class="ib" style="width:81%"></div></div><div class="ipct">81%</div></div>
-  <div class="irow"><div class="ilbl">Diclofenac (pharma)</div><div class="ibw"><div class="ib" style="width:100%"></div></div><div class="ipct">100%</div></div>
-  <div class="irow"><div class="ilbl">Cr(VI) removal</div><div class="ibw"><div class="ib" style="width:95%"></div></div><div class="ipct">95%</div></div>
-  <div class="irow"><div class="ilbl">Pesticide degradation</div><div class="ibw"><div class="ib" style="width:99%"></div></div><div class="ipct">~99%</div></div>
-  <div class="irow"><div class="ilbl">As removal vs. chemical</div><div class="ibw"><div class="ib ibt" style="width:88%"></div></div><div class="ipct ipct-t">8×</div></div>
-
-  <div class="rfooter">
-    <p style="font-size:5.5px;color:#bbb;margin-bottom:3px;">Values from individual component species literature only.</p>
-    <p><strong>Key References:</strong> Wu et al. (2022) PNAS 119(47) e2214513119 · ATSDR Substance Priority List 2022 · EPA HAPs Initial List (CAA §112) · CERCLA 40 CFR 302.4 · GAO-25-108408 · WHO Ambient Air Pollution Fact Sheet (2024) · Xue et al. (2020) <em>Curr. Microbiol.</em> 77:997–1005 · Marco-Urrea et al. (2010) <em>J. Hazard. Mater.</em> 176:836–842</p>
-    <p style="margin-top:3px;"><strong>⚠ Speculative elements:</strong> Mercury cascade, novel proteins (Atx1-Hg, CusA-Hg, CusF-Hg), and all genetic modifications are unvalidated proposals. Pathogenic species include proposed virulence-attenuation deletions. Full details: vyrqel.github.io/living-to-clean-2026</p>
-    <p style="margin-top:3px;">Colin Moyer — ASU Polytechnic High School · ASU Change the World 2026</p>
+ 
+    <div class="sh-r" style="margin-top:30px;">Why Multi-Kingdom?</div>
+ 
+    <div class="adv-card adv-g">
+      <h4>Multi-Kingdom Architecture</h4>
+      <p>Fungi (hyphal scaffold + extracellular enzymes) paired with bacteria (metabolic versatility, anaerobic capability). Neither kingdom alone covers the full pollutant spectrum.</p>
+    </div>
+    <div class="adv-card adv-t">
+      <h4>Fungal Highways</h4>
+      <p><em>Fusarium</em> and <em>Trichoderma</em> hyphae act as physical conduits — bacteria travel along fungal filaments to reach otherwise inaccessible contaminated soil zones.</p>
+    </div>
+    <div class="adv-card adv-p">
+      <h4>Zero Volatilization Design</h4>
+      <p>All Hg⁰-producing pathways deleted (ΔMIR, ΔmerA). Mercury stays concentrated and harvestable — never escapes as atmospheric vapor.</p>
+    </div>
+    <div class="adv-card adv-a">
+      <h4>Compatibility Engineering</h4>
+      <p><em>Trichoderma</em> peptaibol + chitinase deletions stop co-species killing. <em>Penicillium</em> pcb cluster deletion protects bacterial members from antibiotic exposure.</p>
+    </div>
+ 
+    <div class="sh-r" style="margin-top:28px;">Representative Efficacy (Literature)</div>
+    <div class="eff-row"><div class="eff-lbl">Petroleum hydrocarbons</div><div class="eff-bar"><div class="eff-fill" style="width:81%"></div></div><div class="eff-pct">81%</div></div>
+    <div class="eff-row"><div class="eff-lbl">Diclofenac (pharmaceutical)</div><div class="eff-bar"><div class="eff-fill" style="width:100%"></div></div><div class="eff-pct">100%</div></div>
+    <div class="eff-row"><div class="eff-lbl">Cr(VI) removal</div><div class="eff-bar"><div class="eff-fill" style="width:95%"></div></div><div class="eff-pct">95%</div></div>
+    <div class="eff-row"><div class="eff-lbl">Pesticide degradation</div><div class="eff-bar"><div class="eff-fill" style="width:99%"></div></div><div class="eff-pct">~99%</div></div>
+    <div class="eff-row"><div class="eff-lbl">As removal vs. chemical</div><div class="eff-bar"><div class="eff-fill eff-fill-t" style="width:88%"></div></div><div class="eff-pct eff-pct-t">8×</div></div>
+    <p class="eff-note">Individual wild-type species literature values only. Consortium performance not experimentally measured.</p>
+ 
+    <!-- REQUIRED: References at bottom of right -->
+    <div class="refs-section">
+      <div class="sh-r">References</div>
+      <div class="ref-line">Wu, C., et al. "Bioremediation of Mercury-Polluted Soil and Water by <em>Metarhizium robertsii</em>." <em>PNAS</em> 119.47 (2022). <a href="https://doi.org/10.1073/pnas.2214513119">doi.org/10.1073/pnas.2214513119</a></div>
+      <div class="ref-line">ATSDR. "Substance Priority List." 2022. <a href="https://www.atsdr.cdc.gov/programs/substance-priority-list.html">atsdr.cdc.gov/programs/substance-priority-list</a></div>
+      <div class="ref-line">U.S. EPA. "Initial List of Hazardous Air Pollutants." CAA §112. <a href="https://www.epa.gov/haps/initial-list-hazardous-air-pollutants-modifications">epa.gov/haps</a></div>
+      <div class="ref-line">U.S. GAO. <em>Superfund: Many Factors Can Affect Cleanup.</em> GAO-25-108408, 2025. <a href="https://www.gao.gov/products/gao-25-108408">gao.gov</a></div>
+      <div class="ref-line">Xue, S., et al. "Synergistic Effect of Rhamnolipids on Petroleum Bioremediation." <em>Current Microbiology</em> 77 (2020), 997–1005.</div>
+      <div class="ref-line">Marco-Urrea, E., et al. "Degradation of Diclofenac by <em>T. versicolor</em>." <em>J. Hazardous Materials</em> 176.1–3 (2010), 836–842.</div>
+      <div class="ref-line">WHO. "Ambient (Outdoor) Air Pollution." Fact Sheet, Oct. 2024. <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health">who.int</a></div>
+    </div>
+ 
+    <div class="r-footer">
+      <p><strong>⚠ Speculative disclosure:</strong> Mercury cascade and novel proteins (Atx1-Hg, CusA-Hg, CusF-Hg) are unvalidated proposals. Efficacy values reflect individual wild-type species literature only. Full site: <strong style="color:var(--gm);">vyrqel.github.io/living-to-clean-2026</strong></p>
+    </div>
+ 
   </div>
 </div>
-
-</div>
+ 
+<script>
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://vyrqel.github.io/living-to-clean-2026/",
+    width: 168,
+    height: 168,
+    colorDark: "#0a2e1c",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
 </body>
 </html>
